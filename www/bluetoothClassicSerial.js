@@ -1,7 +1,7 @@
 /*global cordova*/
 module.exports = {
 
-    version: '0.9.12',
+    version: '0.9.13',
 
     connect: function (deviceId, interfaceArray, success, failure) {
 
