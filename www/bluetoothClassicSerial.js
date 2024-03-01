@@ -3,6 +3,12 @@ module.exports = {
 
     version: '0.9.13',
 
+    // iOS only, initialize the CBCentralManager so we can request bluetooth permissions whenever we want.
+    // https://github.com/pauldemarco/flutter_blue/pull/599
+    initializeBluetooth: function(success, failure) {
+        cordova.exec(success, failure, "BluetoothClassicSerial", "initializeBluetooth", []);
+    },
+
     connect: function (deviceId, interfaceArray, success, failure) {
 
       if (typeof interfaceArray === 'string') {

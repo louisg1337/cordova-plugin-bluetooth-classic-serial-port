@@ -12,7 +12,8 @@
     self.bluetoothEnabled = false;
 
     // State the core bluetooth central manager
-    self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
+    // self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
+    self.bluetoothManager = nil;
 
     // Initialise array to hold communication sessions
     self.communicationSessions = [[NSMutableArray alloc] init];
@@ -31,6 +32,14 @@
 }
 
 #pragma mark - Cordova Plugin Methods
+
+// Initialize the CBCentralManager upon command so we can request bluetooth permissions whenever we want.
+// https://github.com/pauldemarco/flutter_blue/pull/599
+- (void)initializeBluetooth:(CDVInvokedUrlCommand *)command {
+    if (self.bluetoothManager == nil) {
+        self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil options:nil];
+    }   
+}
 
 - (void)clearDeviceDiscoveredListener:(CDVInvokedUrlCommand *)command {
     self.deviceDiscoveredCallbackID = nil;
